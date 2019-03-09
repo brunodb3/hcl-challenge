@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Bruno Duarte Brito",
+  "name": "hcl-challenge-server",
+  "description": "HCL Challenge Server",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "firebase": "^5.8.6",
+    "mongoose": "^5.4.5"
+  }
+}

@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="logout()" matTooltip="Logout">
+        <mat-icon class="icon">power_settings_new</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+<mat-card class="todos-card">
+  <mat-card-header>
+    <mat-card-title>HCL Challenge</mat-card-title>
+    <mat-card-subtitle>To-Do List</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    Empty for now...
+    <!-- <div class="todo-block" *ngFor="let todo of todos">
+      <h3>
+        <mat-icon class="vertical-align icon" *ngIf="todo.author == 'Chatbot'">computer</mat-icon>
+        <mat-icon class="vertical-align icon" *ngIf="todo.author != 'Chatbot'">account_circle</mat-icon>
+        {{ todo.output.text }}
+      </h3>
+
+      <p>{{ todo.author }} | {{ todo.sentDate | date:'MMM d, y, h:mm:ss a' }}</p>
+
+      <mat-divider></mat-divider>
+    </div> -->
+  </mat-card-content>
+
+  <!-- <mat-card-actions>
+    <form id="todo-form" [formGroup]="messageForm">
+        <mat-form-field class="full-width">
+          <input matInput #todo minLength="1" maxlength="256" placeholder="Mensagem" formControlName="todo">
+          <mat-hint align="start">
+            <strong>Digite aqui sua mensagem</strong>
+          </mat-hint>
+          <mat-hint align="end">{{todo.value.length}} / 256</mat-hint>
+        </mat-form-field>
+
+        <button class="full-width form-button" mat-flat-button color="primary" (click)="submitMessage(todo.value)" [disabled]="!messageForm.valid">Enviar</button>
+      </form>
+  </mat-card-actions> -->
+</mat-card>
