@@ -6,7 +6,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 // importing custom modules
-import { HomeComponent } from '@app/chat/home/home.component';
+import { HomeComponent } from '@app/todo/home/home.component';
 
 // declaring HomeComponent test suite
 describe('HomeComponent', () => {
