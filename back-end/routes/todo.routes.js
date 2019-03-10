@@ -13,12 +13,7 @@ const TodoModel = mongoose.model('Todo');
 // exporting the module
 module.exports = app => {
   /**
-   * @description Returns a 404 - Not Found error
-   */
-  app.get('/404', async (req, res) => res.send('404 - Not Found'));
-
-  /**
-   * @description Creates a new todo on the database
+   * @description Creates a new todo list on the database
    * @param todo Todo object to insert
    */
   app.post('/todo', async (req, res) => {
@@ -38,6 +33,64 @@ module.exports = app => {
       return res.status(200).json({ message: 'Todo saved', todo: newItem });
     } catch (err) {
       return res.status(401).json({ message: 'Error saving Todo' });
+    }
+  });
+
+  /**
+   * @description Delete a todo from the database
+   * @param id ID of the todo to delete
+   */
+  app.delete('/todo/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      await TodoModel.deleteOne({ _id: mongoose.Types.ObjectId(id) });
+
+      return res.status(200).json({ message: 'Todo removed' });
+    } catch (err) {
+      return res.status(401).json({ message: 'Error saving Todo' });
+    }
+  });
+
+  /**
+   * @description Updates a todo on the database
+   * @param todo Updated todo object
+   */
+  app.put('/todo/:id', async (req, res) => {
+    const { id } = req.params;
+    const { todo } = req.body;
+
+    try {
+      const query = { _id: mongoose.Types.ObjectId(id) };
+      const updatedItem = {
+        ...todo,
+        updatedAt: new Date()
+      }
+
+      // finding and updating the document
+      await TodoModel.findOneAndUpdate(query, updatedItem);
+
+      return res.status(200).json({ message: 'Todo saved', todo: updatedItem });
+    } catch (err) {
+      return res.status(401).json({ message: 'Error updating Todo' });
+    }
+  });
+
+  /**
+   * @description Retrieves all todos from an author
+   */
+  app.get('/todos/:author', async (req, res) => {
+    const { author } = req.params;
+
+    try {
+      const query = { author: author };
+
+      // finding and updating the document
+      const todos = await TodoModel.find(query);
+
+      return res.status(200).json({ message: `Todos for ${author} retrieved`, todos: todos });
+    } catch (err) {
+      return res.status(401).json({ message: 'Error getting Todos' });
     }
   });
 };

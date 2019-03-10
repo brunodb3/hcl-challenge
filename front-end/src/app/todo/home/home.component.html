@@ -9,36 +9,29 @@
 
 <mat-card class="todos-card">
   <mat-card-header>
-    <mat-card-title>HCL Challenge</mat-card-title>
-    <mat-card-subtitle>To-Do List</mat-card-subtitle>
+    <mat-card-title>HCL Challenge - {{ user.email }}</mat-card-title>
+    <mat-card-subtitle>{{ todos.length }} Todos</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
-    Empty for now...
-    <!-- <div class="todo-block" *ngFor="let todo of todos">
-      <h3>
-        <mat-icon class="vertical-align icon" *ngIf="todo.author == 'Chatbot'">computer</mat-icon>
-        <mat-icon class="vertical-align icon" *ngIf="todo.author != 'Chatbot'">account_circle</mat-icon>
-        {{ todo.output.text }}
-      </h3>
-
-      <p>{{ todo.author }} | {{ todo.sentDate | date:'MMM d, y, h:mm:ss a' }}</p>
-
-      <mat-divider></mat-divider>
-    </div> -->
+    <mat-nav-list>
+      <mat-list-item *ngFor="let todo of todos">
+        <a matLine>{{ todo.title }}</a>
+        <button mat-icon-button (click)="delete(todo)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-card-content>
 
-  <!-- <mat-card-actions>
-    <form id="todo-form" [formGroup]="messageForm">
+  <mat-card-actions>
+    <form id="todo-form" [formGroup]="todoForm">
         <mat-form-field class="full-width">
-          <input matInput #todo minLength="1" maxlength="256" placeholder="Mensagem" formControlName="todo">
-          <mat-hint align="start">
-            <strong>Digite aqui sua mensagem</strong>
-          </mat-hint>
+          <input matInput #todo minLength="1" maxlength="256" placeholder="What do you need to do?" formControlName="todo">
           <mat-hint align="end">{{todo.value.length}} / 256</mat-hint>
         </mat-form-field>
 
-        <button class="full-width form-button" mat-flat-button color="primary" (click)="submitMessage(todo.value)" [disabled]="!messageForm.valid">Enviar</button>
+        <button class="full-width form-button" mat-flat-button color="primary" (click)="submitTodo(todo.value)" [disabled]="!todoForm.valid">Send</button>
       </form>
-  </mat-card-actions> -->
+  </mat-card-actions>
 </mat-card>

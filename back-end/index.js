@@ -7,7 +7,6 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
-const firebase = require('firebase');
 const bodyParser = require('body-parser');
 
 // creating the app
@@ -19,6 +18,15 @@ app.use(bodyParser.json());
 // importing custom libraries
 require('./models/todo.model');
 require('./routes/todo.routes')(app);
+
+// global routes
+app.get('/', (req, res) => res.status(200)
+  .send({ message: 'Welcome to the HCL Challenge by Bruno Duarte Brito' }));
+
+// 404 middleware
+app.use((req, res, next) => {
+  return res.status(404).send({ message: `Route ${req.url} not found.` });
+});
 
 // global variables
 const { env } = process;
@@ -38,16 +46,6 @@ mongoose.connect(env.DB_URI, connectOptions, (err, db) => {
   }
 
   console.log(`Connected to MongoDB`);
-});
-
-// initializing the Firebase app
-firebase.initializeApp({
-  apiKey: env.FIRE_API_KEY,
-  authDomain: env.FIRE_AUTH_DOMAIN,
-  databaseURL: env.FIRE_DB_URL,
-  projectId: env.FIRE_PROJECT_ID,
-  storageBucket: env.FIRE_STORAGE,
-  messagingSenderId: env.FIRE_MESSAGING_SENDER
 });
 
 // starting the app on the given port

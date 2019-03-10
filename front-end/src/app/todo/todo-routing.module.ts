@@ -9,14 +9,10 @@ import { Routes, RouterModule } from '@angular/router';
 // importing custom components
 import { HomeComponent } from '@app/todo/home/home.component';
 
-// importing guards
-import { AuthGuard } from '@app/auth/auth.guard';
-
 // creating the routes
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     component: HomeComponent
   }
 ];

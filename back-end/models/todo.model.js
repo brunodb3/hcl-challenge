@@ -9,7 +9,7 @@ const { Schema } = mongoose;
 
 // creating the schema
 const todoSchema = new Schema({
-  text: String,
+  title: String,
   author: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }

@@ -1,0 +1,14 @@
+// signup.component.scss
+//  - signup component sass declarations
+// -------------------------------------------------------------------------------------------------
+
+// importing custom variables
+@import '../../../styles-variables';
+
+#signup-form {
+  margin: 3% 5% 0 5%;
+}
+
+.signup-card {
+  margin: 0 5% 0 5%;
+}

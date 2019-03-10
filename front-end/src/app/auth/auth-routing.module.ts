@@ -8,12 +8,27 @@ import { Routes, RouterModule } from '@angular/router';
 
 // importing custom components
 import { LoginComponent } from '@app/auth/login/login.component';
+import { SignupComponent } from '@app/auth/signup/signup.component';
 
 // creating the routes
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 ];
 

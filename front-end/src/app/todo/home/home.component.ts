@@ -3,10 +3,11 @@
 // -------------------------------------------------------------------------------------------------
 
 // importing 3rd party libraries
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Meta, Title } from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // custom modules
@@ -19,11 +20,13 @@ import { AuthService } from '@app/auth/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   // component variable declarations
-  public todos = [];
+  public user: any = {};
   public todoForm: FormGroup;
-  private componentName = 'home';
+  public todos: Array<any> = [];
+  private userSubscription: Subscription;
+  private todoSubscription: Subscription;
 
   constructor(
     public meta: Meta,
@@ -66,6 +69,34 @@ export class HomeComponent {
     ]);
   }
 
+  // fires when component is ready
+  ngOnInit(): void {
+    this.userSubscription = this.authService.currentUser().subscribe(
+      user => {
+        // navigating to the login route
+        if (!user) this.router.navigate(['/auth/login'])
+
+        this.user = user;
+
+        // getting the todos for the current user
+        this.todoSubscription = this.todoService.getTodos(this.user.email).subscribe(
+          response => {
+            this.todos = response.todos;
+          },
+          error => {
+            this.snackBar.open(error.message);
+          }
+        )
+      }
+    );
+  }
+
+  // fires when the component is destroyed
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+    this.todoSubscription.unsubscribe();
+  }
+
   // submits a todo to the services
   submitTodo(todo: string): void {
     // resetting the todo form
@@ -73,16 +104,32 @@ export class HomeComponent {
 
     // creating an object for the sent todo (in the format of the API response)
     const todoObject = {
-      text: todo
+      title: todo,
+      author: this.user.email
     };
-
-    // pushing the todo object to the list
-    this.todos.push(todoObject);
 
     // sending a todo to the API
     this.todoService.sendTodo(todoObject).subscribe(
       success => {
         this.snackBar.open(success.message);
+        // pushing the todo object to the list
+        this.todos.push(success.todo);
+      },
+      error => {
+        // showing snackbar notification
+        this.snackBar.open(error.message);
+      }
+    );
+  }
+
+  // submits the delete request to the server
+  delete(todo: any): void {
+    // deleting a todo
+    this.todoService.deleteTodo(todo._id).subscribe(
+      success => {
+        this.snackBar.open(success.message);
+        // removing the todo object from the list
+        this.todos.splice(this.todos.findIndex((each) => each._id === todo._id), 1);
       },
       error => {
         // showing snackbar notification

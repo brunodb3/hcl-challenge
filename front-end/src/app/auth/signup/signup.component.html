@@ -1,11 +1,11 @@
-<mat-card class="login-card">
+<mat-card class="signup-card">
     <mat-card-header>
       <mat-card-title>HCL Challenge</mat-card-title>
-      <mat-card-subtitle>Please login to continue</mat-card-subtitle>
+      <mat-card-subtitle>Please signup to continue</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-      <form id="login-form" [formGroup]="loginForm">
+      <form id="signup-form" [formGroup]="signupForm">
 
           <mat-form-field class="full-width">
             <input matInput #email minLength="1" maxlength="256" placeholder="E-mail" formControlName="email" type="email">
@@ -21,8 +21,8 @@
             </mat-hint>
           </mat-form-field>
 
-          <button class="full-width form-button" mat-flat-button color="primary" (click)="submitLogin(email.value, password.value)" [disabled]="!loginForm.valid">Login</button>
-          <button class="full-width form-button" mat-flat-button color="primary" (click)="router.navigate(['/auth/signup'])">Signup</button>
+          <button class="full-width form-button" mat-flat-button color="primary" (click)="submitSignup(email.value, password.value)" [disabled]="!signupForm.valid">Signup</button>
+          <button class="full-width form-button" mat-flat-button color="primary" (click)="router.navigate(['/auth/login'])">Login</button>
 
         </form>
     </mat-card-content>

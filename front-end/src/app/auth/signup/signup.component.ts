@@ -1,5 +1,5 @@
-// login.component.ts
-//  - login component declaration
+// signup.component.ts
+//  - signup component declaration
 // -------------------------------------------------------------------------------------------------
 
 // importing 3rd party libraries
@@ -16,13 +16,13 @@ import { AuthService } from '@app/auth/auth.service';
 
 // creating the component
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit, OnDestroy {
   // component variable declarations
-  public loginForm: FormGroup;
+  public signupForm: FormGroup;
   private userSubscription: Subscription;
 
   constructor(
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     public formBuilder: FormBuilder
   ) {
     // creating the message form validation group
-    this.loginForm = formBuilder.group({
+    this.signupForm = formBuilder.group({
       email: [
         '',
         [
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     // adding title
-    title.setTitle('HCL Challenge - Login');
+    title.setTitle('HCL Challenge - Signup');
 
     // adding meta tags to the component
     meta.addTags([
@@ -88,13 +88,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.userSubscription.unsubscribe();
   }
 
-  // submits the login request to the services
-  submitLogin(email: string, password: string): void {
-    // resetting the login form
-    this.loginForm.reset();
+  // submits the signup request to the services
+  submitSignup(email: string, password: string): void {
+    // resetting the signup form
+    this.signupForm.reset();
 
-    // sending the login request to the API
-    this.authService.sendLogin(email, password).then(
+    // sending the signup request to the API
+    this.authService.sendSignup(email, password).then(
       success => {
         // showing snackbar notification
         this.snackBar.open(`Welcome ${email}`);

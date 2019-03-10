@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 
 // creating the module
 @NgModule({
@@ -40,6 +41,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
   ],
   declarations: [
     // custom components
+  ],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500} }
   ],
   exports: [
     // angular modules

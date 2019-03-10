@@ -4,8 +4,13 @@
 
 // importing 3rd party libraries
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
 import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// importing environment
+import { environment } from '@env/environment';
 
 // importing main app files
 import { AppComponent } from '@app/app.component';
@@ -25,6 +30,8 @@ import { SharedModule } from '@app/shared';
     // angular modules
     BrowserModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
 
     // custom modules
     CoreModule,

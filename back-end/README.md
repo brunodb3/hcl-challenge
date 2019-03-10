@@ -18,6 +18,6 @@ To run the server locally, you should run `npm start`. This will fire up at `loc
 
 ## Live Demo
 
-To see a live demo of this project, go to [hcl-challenge.firebaseapp.com](https://hcl-challenge.firebaseapp.com)
+To see a live demo of this project, go to [hcl-challenge.herokuapp.com](https://hcl-challenge.herokuapp.com/)
 
 [@brunodb3](https://github.com/brunodb3) - 2019

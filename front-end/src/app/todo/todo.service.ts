@@ -27,7 +27,7 @@ export class TodoService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: this.authService.getToken()
+        // Authorization: this.authService.getToken()
       })
     };
 
@@ -40,5 +40,38 @@ export class TodoService {
       requestBody,
       httpOptions
     );
+  }
+
+  /**
+   * @description Retrieves the todos from the current user
+   * @param author Author of the todo
+   */
+  getTodos(author: any): Observable<any> {
+    // creating the HTTP Options (with headers)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: this.authService.getToken()
+      })
+    };
+
+    // returning the request
+    return this.http.get(`${environment.apiUrl}/todos/${author}`, httpOptions);
+  }
+
+  /**
+   * @description Deletes a todo from the server
+   * @param id ID of the todo
+   */
+  deleteTodo(id: string): Observable<any> {
+    // creating the HTTP Options (with headers)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+
+    // returning the request
+    return this.http.delete(`${environment.apiUrl}/todo/${id}`, httpOptions);
   }
 }
