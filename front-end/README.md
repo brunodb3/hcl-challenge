@@ -4,8 +4,6 @@ by [@brunodb3](https://github.com/brunodb3)
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-[![image.png](https://i.postimg.cc/HLtmM2VX/image.png)](https://postimg.cc/R3q25w1Z)
-
 ---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
